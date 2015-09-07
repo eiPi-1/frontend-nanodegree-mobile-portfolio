@@ -1,0 +1,2 @@
+http://stackoverflow.com/questions/7261855/recommendation-for-compressing-jpg-files-with-imagemagick
+http://www.imagemagick.org/Usage/resize/
