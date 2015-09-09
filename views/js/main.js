@@ -450,11 +450,24 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+
+    // calculating the length of the items of this class
+    // using getElementsByClassName as it is fast selection operation
+
+    var arr_len = document.getElementsByClassName("randomPizzaContainer").length;
+    var arr_rand_pizza_cont = document.getElementsByClassName("randomPizzaContainer");
+
+    // dx and newwidth are the same for all other items of this array
+    // so calculating them using the information from the first item only.
+    var dx = determineDx(arr_rand_pizza_cont[0], size);
+    var newwidth = (arr_rand_pizza_cont[0].offsetWidth + dx) + 'px';
+
+    for (var i = 0; i < arr_len; i++) {
+      arr_rand_pizza_cont[i].style.width = newwidth;
     }
+
+    // using getElementsByClassName as it is fast selection operation
+    document.getElementsByClassName("randomPizzaContainer") = arr_rand_pizza_cont;
   }
 
   changePizzaSizes(size);
@@ -469,8 +482,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
+
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -502,10 +516,13 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
+  // base phase is the part of the calculatin that is the same for every item in the loop
   var base_phase = (document.body.scrollTop / 1250);
 
-  for (var i = 0; i < items.length; i++) {
+  var items_len = items.length;
+
+  for (var i = 0; i < items_len; i++) {
     items[i].style.left = items[i].basicLeft + 100 * Math.sin(base_phase + (i % 5)) + 'px';
   }
 
@@ -526,7 +543,12 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+
+  // if a pizza is 100 px and the distance between the centers
+  // of two pizza pictures is 256 then there shold be that many rows
+  var num_pizzas = Math.floor(window.screen.height * cols / s);
+
+  for (var i = 0; i < num_pizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";

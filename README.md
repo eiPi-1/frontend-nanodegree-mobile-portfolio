@@ -83,6 +83,8 @@ Solution Part 2: Optimize Frames per Second in pizza.html
  (document.body.scrollTop / 1250) is evaluated to a constant and it does not change when iterating through items in updatePositions() function.
  Thus taking it out of the loop will help avoiding recalculations of the same thing. And indeed the effect on frame rate is clearly visible after this change.
  The time spent in the updatePositions() is much smaller and 60 fps are reached now.
+ document.getElementsByClassName() was used instead of document.querySelectorAll() as it is faster.
+ Array length was found and assigned to a variable in every case where it was used in a loop.
  
 
 
