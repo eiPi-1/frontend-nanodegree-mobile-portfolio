@@ -71,3 +71,18 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
 * <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
 * <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+
+Solution Part 1: Optimize PageSpeed Insights score for index.html
+
+The images are resized and their quality is reduced. 
+CSS style was inlined.
+This helped achieve above 90 PageSpeed Insides score.
+
+Solution Part 2: Optimize Frames per Second in pizza.html
+
+ (document.body.scrollTop / 1250) is evaluated to a constant and it does not change when iterating through items in updatePositions() function.
+ Thus taking it out of the loop will help avoiding recalculations of the same thing. And indeed the effect on frame rate is clearly visible after this change.
+ The time spent in the updatePositions() is much smaller and 60 fps are reached now.
+ 
+
+
