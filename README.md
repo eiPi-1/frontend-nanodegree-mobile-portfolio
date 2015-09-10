@@ -91,5 +91,7 @@ Solution Part 2: Optimize Frames per Second in pizza.html
  document.getElementsByClassName() was used instead of document.querySelectorAll() as it is faster.
  Array length was found and assigned to a variable in every case where it was used in a loop.
  
+ The compression done by grunt + imagemagic made pizza.png larger (as file size not as pixel size) than the original,
+ so the original pizza.png has to be copied to the images/ folder.
 
 
