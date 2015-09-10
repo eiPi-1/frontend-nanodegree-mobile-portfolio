@@ -78,6 +78,11 @@ The images are resized and their quality is reduced.
 CSS style was inlined.
 This helped achieve above 90 PageSpeed Insides score.
 
+grund and imagemagic were used to reduce image file size and quality.
+For profilepic.jpg and pizzeria.jpg the image compression was done manually by opening it
+and subsequently saving it using Sketchbook Express. The image quality to compression was
+much better then using grunt + imagemagic.
+
 Solution Part 2: Optimize Frames per Second in pizza.html
 
  (document.body.scrollTop / 1250) is evaluated to a constant and it does not change when iterating through items in updatePositions() function.
